@@ -18,7 +18,7 @@
 			<!-- Top Navigation -->
 
 			<header class="codrops-header">
-				<h1>MarkCalc <span>Releasing Nov 12</span></h1>	
+				<h1>MarkCalc <span></span></h1>	
 			</header>
 			<section>
 				<form id="theForm" class="simform" autocomplete="off">
@@ -44,8 +44,8 @@
 								<input id="q4" name="q4" type="text"/>
 							</li>
 							<li>
-								<span><label for="q4">What is your "Application" mark?</label></span>
-								<input id="q4" name="q4" type="text"/>
+								<span><label for="q5">What is your "Application" mark?</label></span>
+								<input id="q5" name="q5" type="text"/>
 							</li>
 
 						</ol><!-- /questions -->
@@ -79,14 +79,119 @@ console.log("sss");
 					// hide form
 					// 
 					classie.addClass( theForm.querySelector( '.simform-inner' ), 'hide' );
-					var messageEl = theForm.querySelector( '.final-message' );
-					messageEl.innerHTML = 'App Coming Soon...';
-					classie.addClass( messageEl, 'show' );
 
-					var q1 = document.getElementById('q1').value;
-					var q2 = document.getElementById('q2').value;
-			        var q3 = document.getElementById('q3').value;
-					var q4 = document.getElementById('q4').value;	
+
+					var subject = document.getElementById('q1').value;
+					var kuMark = document.getElementById('q2').value;
+			        var thinkingMark = document.getElementById('q3').value;
+					var communicationMark = document.getElementById('q4').value;	
+					var applicationMark = document.getElementById('q4').value;
+
+	      var aWeight;
+		  var kWeight;
+		  var tWeight;
+		  var cWeight;
+		  	  var dashLength;
+		  var mark1;
+		  var mark1_1;
+		  var mark1_2;
+		  var Mark1;
+		  
+		  
+		  var mark2;
+		  var mark2_1;
+		  var mark2_2;
+		  var Mark2;
+		  
+		  var mark3;
+		  var mark3_1;
+		  var mark3_2;
+		  var Mark3;
+		  
+		  var mark4;
+		  var mark4_1;
+		  var mark4_2;
+		  var Mark4;
+
+		  subject = subject.toLowerCase();
+		  subject = subject.trim();
+
+		if (subject=="chem" || subject=="chemistry" || subject=="bio" || subject == "biology"){
+			aWeight = 0.25;
+			kWeight = 0.25;
+			tWeight = 0.25;
+			cWeight = 0.25;
+
+		  }
+		  else if (subject=="accounting" || subject=="business" || subject=="functions" || subject == "math" || subject == "calc" || subject == "adv functions" || subject == "advanced functions" || 
+		  subject == "calculus" || subject == "calculus and vectors"){
+			aWeight = 0.30;
+			kWeight = 0.30;
+			tWeight = 0.20;
+			cWeight = 0.20;
+		  }
+		  else if (subject=="art" || subject=="arts" || subject=="visual arts" || subject == "music" || subject == "drama" || subject == "media arts"){
+			aWeight = 0.2;
+			kWeight = 0.3;
+			tWeight = 0.3;
+			cWeight = 0.2;
+		  }
+		  else if (subject=="physics"){
+			aWeight = 0.3;
+			kWeight = 0.2;
+			tWeight = 0.3;
+			cWeight = 0.2;
+		  }
+		  else if (subject=="english" || subject=="language" || subject=="eng"){
+			aWeight = 0.1;
+			kWeight = 0.3;
+			tWeight = 0.3;
+			cWeight = 0.3;
+		  }
+		  else if (subject=="tech" || subject=="tech design" || subject=="comp sci" || subject=="computer science" || subject=="technological design" || subject=="photography" || 
+		  subject=="photography and digital imaging" || subject=="comm tech" || subject=="communication technology"){
+			aWeight = 0.3;
+			kWeight = 0.2;
+			tWeight = 0.3;
+			cWeight = 0.2;
+		  }
+	  mark1 = kuMark;
+		  dashLength = mark1.indexOf('/');
+		  mark1_1 = parseFloat(mark1.substring(0, dashLength));
+		  mark1_2 = parseFloat(mark1.substring(dashLength + 1 , mark1.length));
+		  Mark1 = (mark1_1 / mark1_2)*100;
+		  Mark1 *= kWeight;
+		  
+		  mark2 = applicationMark;
+		  dashLength = mark2.indexOf('/');
+		  mark2_1 = parseFloat(mark2.substring(0, dashLength));
+		  mark2_2 = parseFloat(mark2.substring(dashLength + 1 , mark2.length));
+		  Mark2 = (mark2_1 / mark2_2)*100;
+		  Mark2 *= aWeight;
+		  mark3 = thinkingMark;
+		  dashLength = mark3.indexOf('/');
+		  mark3_1 = parseFloat(mark3.substring(0, dashLength));
+		  mark3_2 = parseFloat(mark3.substring(dashLength + 1 , mark3.length));
+		  Mark3 = (mark3_1 / mark3_2)*100;
+		  Mark3 *= tWeight;
+		  
+		  mark4 = communicationMark;
+		  dashLength = mark4.indexOf('/');
+		  mark4_1 = parseFloat(mark4.substring(0, dashLength));
+		  mark4_2 = parseFloat(mark4.substring(dashLength + 1 , mark4.length));
+		  Mark4 = (mark4_1 / mark4_2)*100;
+		  Mark4 *= cWeight;
+		  
+		  var overallMarkFinal;
+		  var overallMark;
+		  overallMark = Mark1 + Mark2 + Mark3 + Mark4;
+		  overallMark = Math.round(overallMark * 10.0) / 10.0;
+
+		  overallMarkFinal = overallMark.toString() + '%';
+		  			
+		  			var messageEl = theForm.querySelector( '.final-message' );
+					messageEl.innerHTML = 'Your mark is ' + overallMarkFinal;
+					classie.addClass( messageEl, 'show' );
 		            
 
 
